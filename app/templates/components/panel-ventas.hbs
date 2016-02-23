@@ -1,0 +1,100 @@
+<div class="row">
+
+  <div class="panel-body">
+    <form class="form-inline pull-right">
+      <button class="btn btn-default btn-xs" {{action 'addVenta'}}>agregar</button>
+    </form>  
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-xs-1">CODIGO</th>
+          <th class="col-xs-4">DESCRIPCION</th>
+          <th class="col-xs-1">FECHA</th>
+          <th class="col-xs-1">CANTIDAD</th>
+          <th class="col-xs-1">INTERES</th>
+          <th class="col-xs-1">DESCUENTO</th>
+          <th class="col-xs-1">TOTAL</th>
+          <th class="col-xs-1">SALDO</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each ventas as |item|}}
+        <tr>
+          <td class="col-xs-1">{{item.producto.codigo}}</td>
+          <td class="col-xs-4">{{item.producto.texto}}</td>
+          <td class="col-xs-1">{{moment-format item.fechaVenta}}</td>
+          <td class="col-xs-1">{{item.cantidad}}</td>
+          <td class="col-xs-1">{{item.interes}}</td>
+          <td class="col-xs-1">{{item.descuento}}</td>
+          <td class="col-xs-1">{{item.totalVenta}}</td>
+          <td class="col-xs-1">{{item.saldo}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-3">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">Totales</div>
+
+      <div class="panel-body">
+
+        <form>
+          <div class="form-group">
+          <label>Total</label>
+          <input type="number" value={{total}} class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
+          </div>
+
+          <div class="form-group">
+          <label>Porcentaje</label>
+          {{input type="number" value=interes class="form-control" aria-describedby="basic-addon1" disabled=disabled}}
+          </div>
+
+          <div class="form-group">
+          <label>Total con Interes</label>
+          <input type="number" value=totalConInteres class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
+          </div>
+
+          <div class="form-group">
+          <label>Saldo</label>
+          <input type="number" value=saldo class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body ">
+        <form class="form-inline pull-right">
+          <button class="btn btn-default btn-xs" {{action 'add'}}>agregar</button>
+        </form>  
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-xs-4">FECHA</th>
+              <th class="col-xs-4">MONTO</th>
+              <th class="col-xs-2">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each cuotas as |item|}}
+            <tr>
+              <td class="col-xs-4">{{item.fechaCuota}}</td>
+              <td class="col-xs-4">{{item.monto}}</td>
+              <td class="col-xs-2"><button class="btn btn-default btn-xs" {{action 'delete' item}}>Eliminar</button></td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

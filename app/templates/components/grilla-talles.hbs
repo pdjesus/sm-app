@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Talle Producto</div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-sm-2">#</th>
+          <th class="col-xs-4">TALLE</th>
+          <th class="col-xs-4">STOCK</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each producto.talles as |item|}}
+        <tr>
+          <td class="col-sm-2">{{input type="radio" value=item.selected name="talle" click=(action 'selectTalle' item)}}</td>
+          <td class="col-xs-4">{{item.talle}}</td>
+          <td class="col-xs-4">{{item.stock}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>    

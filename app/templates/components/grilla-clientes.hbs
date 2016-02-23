@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+
+  <div class="panel-body">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>NOMBRE</th>
+          <th>DNI</th>
+          <th>DOMICILIO</th>
+          <th>TELEFONO</th>
+          <th>EMAIL</th>
+          <th>CIUDAD</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each filteredModel as |item|}}
+        <tr>
+          <td>{{input type="radio" value=item.selected name="cliente" click=(action 'selectCliente' item)}}</td>
+          <td>{{item.nombre}}</td>
+          <td>{{item.dni}}</td>
+          <td>{{item.domicilio}}</td>
+          <td>{{item.telefono}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.ciudad.nombre}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>  
+</div>

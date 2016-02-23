@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+  <div class="panel-heading">{{cliente.nombre}}</div>
+  <div class="panel-body">
+    Domicilio: {{cliente.domicilio}} ({{cliente.ciudad.nombre}})<br/>
+    Telefono: {{cliente.telefono}}<br/>
+    Fecha de Nacimiento: {{#if cliente.fechaNac}}{{moment-format cliente.fechaNac}}{{/if}}<br/>
+    Email: {{cliente.email}}
+  </div>
+</div>

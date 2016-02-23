@@ -1,0 +1,120 @@
+{{#if showError}}
+<div class='form-group form-group-sm has-error' >
+  <span class="help-block">{{errors.model.producto}}</span>
+  <span class="help-block">{{errors.model.talle}}</span>
+</div>
+{{/if}}
+
+{{detalle-cliente cliente=model.ficha.cliente}}
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingProducto">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#panelProductos" aria-expanded="true" aria-controls="panelProductos">
+          Producto
+        </a>
+      </h4>
+    </div>
+
+    <div id="panelProductos" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingProducto">
+      <div class="panel-body">
+        {{grilla-productos}}
+        <br/>
+        {{grilla-talles producto=model.producto}}    
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingDetalle">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#panelDetalle" aria-expanded="true" aria-controls="panelDetalle">
+          Detalle Venta
+        </a>
+      </h4>
+    </div>
+    <div id="panelDetalle" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingDetalle">
+      <div class="panel-body">
+        <form class="form-horizontal">
+
+        <div class="col-sm-2">
+          {{#app-label text="Fecha Venta" errors=errors.model.fechaVenta enable=showError labelClassNames="control-label"}}
+          <div class="input-group">
+            {{bootstrap-datepicker value=model.fechaVenta format="dd/mm/yyyy" class="form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"}}
+          </div>
+          {{/app-label}} 
+
+          {{#app-label text="Forma de Pago" errors=errors.formaPago enable=showError labelClassNames="control-label"}}
+            {{ember-selectize
+              content=formasPago
+              value=formaPago
+            }}
+          {{/app-label}}
+
+          {{#if isContado }}
+          {{#app-label text="Descuento" errors=errors.descuento enable=showError labelClassNames="control-label"}}
+          <div class="input-group">
+            <div class="input-group-addon">%</div>
+            {{input type="number" value=descuento class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+          </div>
+          {{/app-label}}  
+          {{/if}}
+
+        </div>    
+
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-2">
+          {{#app-label text="Cantidad" errors=errors.cantidad enable=showError labelClassNames="control-label"}}
+          <div class="input-group">
+            {{input type="number" value=cantidad class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+          </div>  
+          {{/app-label}}  
+
+          {{#app-label text="Precio Venta" errors=errors.model.totalVenta enable=showError labelClassNames="control-label"}}
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            {{input type="number" value=model.totalVenta class="form-control" placeholder="0" aria-describedby="basic-addon1" disabled=isFinanciado}}
+          </div>
+          {{/app-label}}  
+
+        </div>
+
+        <div class="col-sm-2"></div>
+
+        <div class="col-sm-2">
+
+          {{#unless isContado }}
+          {{#app-label text="Entrega" errors=errors.entrega enable=showError labelClassNames="control-label"}}
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            {{input type="number" value=entrega class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+          </div>  
+          {{/app-label}}   
+          {{/unless}}
+
+          {{#app-label text="Saldo" errors=errors.saldo enable=showError labelClassNames="control-label"}}
+          <div class="input-group">
+            <div class="input-group-addon">$</div>
+            {{input type="number" value=saldo class="form-control" placeholder="0" aria-describedby="basic-addon1" disabled=true}}
+          </div>
+          {{/app-label}}  
+
+          </div>
+        </form>     
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pull-right">
+  <a href="#" class="btn btn-primary" role="button" {{action "save" model}}>Guardar</a>
+  <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>      
+</div>
+
+
+

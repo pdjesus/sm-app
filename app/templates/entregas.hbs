@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">Entregas</div>
+  <div class="panel-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>FECHA ENTREGA</th>
+          <th>CLIENTE</th>
+          <th>DNI</th>
+          <th>FECHA VENTA</th>
+          <th>DESCRIPCION</th>
+          <th>CODIGO</th>
+          <th>TALLE</th>
+          <th>CANTIDAD</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |item|}}
+        <tr>
+          <td>{{item.fechaEntrega}}</td>
+          <td>{{item.cliente}}</td>
+          <td>{{item.dni}}</td>
+          <td>{{item.fechaVenta}}</td>
+          <td>{{item.descripcion}}</td>
+          <td>{{item.codigo}}</td>
+          <td>{{item.talle}}</td>
+          <td>{{item.cantidad}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div id="formModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header alert-info">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{#if model.isNew}}Nuevo Cliente{{else}}Modificar datos del Cliente{{/if}}</h4>
+      </div>
+      <div class="modal-body">
+      <form>
+          {{#app-label text="Nombre y Apellido" errors=errors.model.nombre enable=showError}}
+          {{input type="text" value=model.nombre class="form-control" placeholder="Nombre y Apellido" aria-describedby="basic-addon1"}}
+          {{/app-label}}
+
+          {{#app-label text="Dni" errors=errors.model.dni enable=showError}}
+          {{input type="number" value=model.dni class="form-control" placeholder="dni" aria-describedby="basic-addon1" max=99999999}}
+          {{/app-label}}
+
+          {{#app-label text="Domicilio" errors=errors.model.domicilio enable=showError}}
+          {{input type="text" value=model.domicilio class="form-control" placeholder="domicilio" aria-describedby="basic-addon1"}}
+          {{/app-label}}
+
+          {{#app-label text="Teléfono" errors=errors.model.telefono enable=showError}}
+          {{input type="text" value=model.telefono class="form-control" placeholder="telefono" aria-describedby="basic-addon1"}}
+          {{/app-label}}
+
+          {{#app-label text="Ciudad" errors=errors.model.ciudad enable=showError}}
+          {{ember-selectize
+          content=ciudades
+          optionValuePath="content.id"
+          optionLabelPath="content.nombre"
+          selection=model.ciudad
+          placeholder="Seleccionar"
+          }}
+          {{/app-label}}
+
+          {{#app-label text="Email" errors=errors.model.email enable=showError}}
+          {{input type="text" value=model.email class="form-control" placeholder="Email" aria-describedby="basic-addon1"}}
+          {{/app-label}}
+
+          {{#app-label text="Fecha Nacimiento" errors=errors.model.fechaNac enable=showError}}
+          {{bootstrap-datepicker value=model.fechaNac format="dd/mm/yyyy" class="form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"}}
+          {{/app-label}}          
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-primary" role="button" {{action "save" model}}>Guardar</a>
+      <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

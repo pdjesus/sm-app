@@ -1,0 +1,49 @@
+<div class="panel-heading">
+  <h3 class="panel-title">Valor del Producto</h3>
+</div>
+<div class="panel-body">
+  <form class="form-horizontal">
+
+    <div class="form-group form-group-sm">
+      <label class="col-sm-4 control-label">Mostrar información detallada del producto.</label>
+      <div class="col-sm-2 input-group">
+        {{input type="checkbox" checked=showFullInformation}} 
+      </div>
+    </div>
+
+    {{#if showFullInformation}}
+    {{#app-label text="Precio Costo" errors=errors.model.precioCosto enable=showError labelClassNames="col-sm-4 control-label"}}
+      <div class="col-sm-4 input-group">
+        <div class="input-group-addon">$</div>
+        {{input type="number" value=precioCosto class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+      </div>
+    {{/app-label}}
+
+    {{#app-label text="Porcentaje" errors=errors.model.porcentaje enable=showError labelClassNames="col-sm-4 control-label"}}
+      <div class="col-sm-4 input-group">
+        <div class="input-group-addon">%</div>
+        {{input type="number" value=porcentaje class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+      </div>
+    {{/app-label}}
+    
+    {{/if}}
+    <div class="form-group form-group-sm">
+      <label class="col-sm-4 control-label">Precio Venta</label>
+      <div class="col-sm-4 input-group">
+        <div class="input-group-addon">$</div>
+        {{input type="number" value=precioVenta class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+      </div>
+    </div>
+    {{#if showFullInformation}}
+
+    <div class="form-group form-group-sm">
+      <label class="col-sm-4 control-label">Ganancia</label>
+      <div class="col-sm-4 input-group">
+        <div class="input-group-addon">$</div>
+        {{input type="number" value=ganancia class="form-control" placeholder="0" aria-describedby="basic-addon1" disabled=true}}
+      </div>
+    </div>            
+    {{/if}}
+
+  </form>  
+</div>

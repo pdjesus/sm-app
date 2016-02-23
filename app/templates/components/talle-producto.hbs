@@ -1,0 +1,28 @@
+<div class="panel-heading">
+  <h3 class="panel-title">Talles</h3>
+</div>
+<div class="panel-body">
+  <form class="form-inline">
+    {{input type="text" value=talle class="form-control input-sm" placeholder="talle" aria-describedby="basic-addon1"}}
+    {{input type="number" value=stock class="form-control input-sm" placeholder="stock" aria-describedby="basic-addon1"}}
+    <button class="btn btn-default btn-xs" {{action 'add'}}>agregar</button>
+  </form>  
+  <table class="table header-fixed">
+    <thead>
+      <tr>
+        <th class="col-xs-4">Talle</th>
+        <th class="col-xs-4">Stock</th>
+        <th class="col-xs-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each talles as |item|}}
+      <tr>
+        <td class="col-xs-4">{{item.talle}}</td>
+        <td class="col-xs-4">{{item.stock}}</td>
+        <td class="col-xs-2"><button class="btn btn-default btn-xs" {{action 'delete' item}}>Eliminar</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
