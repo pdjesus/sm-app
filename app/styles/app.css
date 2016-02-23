@@ -1,0 +1,27 @@
+.selectize-control.single .selectize-input, .selectize-control.single .selectize-input input {
+  width: 100%!important;
+}
+
+.form-control.selectize-control {
+  padding: 0!important;
+}
+
+.container {
+  width: 95%;
+}
+
+.header-fixed thead, .header-fixed tbody, .header-fixed tr, .header-fixed td, .header-fixed th {
+  display: block;
+}
+.header-fixed tbody td, .header-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+.header-fixed thead {
+  width: 97%;
+}
+.header-fixed tbody { 
+  height: 180px; 
+  overflow-y: auto;
+  width: 100%;
+}

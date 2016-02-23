@@ -1,0 +1,67 @@
+<div id="formModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header alert-info">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{#if model.isNew}}Nuevo Producto{{else}}Modificar datos del Producto{{/if}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-6">
+            {{#app-label text="Descripción" errors=errors.model.texto enable=showError}}
+            {{input type="text" value=model.texto class="form-control" placeholder="Descripción" aria-describedby="basic-addon1"}}
+            {{/app-label}}
+
+            {{#app-label text="Codigo" errors=errors.model.codigo enable=showError}}
+            {{input type="text" value=model.codigo class="form-control" placeholder="codigo" aria-describedby="basic-addon1"}}
+            {{/app-label}}
+
+            {{#app-label text="Marca" errors=errors.model.marca enable=showError}}
+            {{ember-selectize
+            content=marcas
+            optionValuePath="content.id"
+            optionLabelPath="content.texto"
+            selection=model.marca
+            placeholder="Seleccionar"
+            classNames="form-control input-sm"
+          }}
+          {{/app-label}}
+
+          {{#app-label text="Categoria" errors=errors.model.categoria enable=showError}}
+          {{ember-selectize
+          content=categorias
+          optionValuePath="content.id"
+          optionLabelPath="content.texto"
+          selection=model.categoria
+          placeholder="Seleccionar"
+          classNames="form-control input-sm"
+        }}
+        {{/app-label}}
+
+        {{#app-label text="Tipo" errors=errors.model.tipo enable=showError}}
+        {{ember-selectize
+        content=tipos
+        optionValuePath="content.id"
+        optionLabelPath="content.texto"
+        selection=model.tipo
+        placeholder="Seleccionar"
+        classNames="form-control input-sm"
+      }}
+      {{/app-label}}
+    </div>
+    <div class="col-xs-6">
+
+      {{talle-producto talles=model.talles producto=model}}
+    </div>
+  </div>
+
+  {{precio-producto model=model errors=errors showError=showError producto=model}}
+
+</div>
+<div class="modal-footer">
+  <a href="#" class="btn btn-primary" role="button" {{action "save"}}>Guardar</a>
+  <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

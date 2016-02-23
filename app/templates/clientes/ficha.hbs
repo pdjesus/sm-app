@@ -1,0 +1,21 @@
+{{detalle-cliente cliente=model.cliente}}
+
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#ventas" aria-controls="ventas" role="tab" data-toggle="tab">Ventas</a></li>
+    <li role="presentation"><a href="#pedidos" aria-controls="pedidos" role="tab" data-toggle="tab">Pedidos</a></li>
+    <li role="presentation"><a href="#entregas" aria-controls="entregas" role="tab" data-toggle="tab">Entregas</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="ventas">
+      {{panel-ventas ventas=model.ventas}}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="pedidos">...</div>
+    <div role="tabpanel" class="tab-pane" id="entregas">...</div>
+  </div>
+
+</div>

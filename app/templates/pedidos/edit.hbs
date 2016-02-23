@@ -1,0 +1,135 @@
+{{#if showError}}
+  <div class='form-group form-group-sm has-error' >
+    <span class="help-block">{{errors.model.producto}}</span>
+    <span class="help-block">{{errors.model.talle}}</span>
+  </div>
+{{/if}}
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingCliente">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#panelClientes" aria-expanded="true" aria-controls="panelClientes">
+          Cliente
+        </a>
+      </h4>
+    </div>
+
+    <div id="panelClientes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingCliente">
+      <div class="panel-body">
+          {{grilla-clientes}}
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingProducto">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#panelProductos" aria-expanded="true" aria-controls="panelProductos">
+          Producto
+        </a>
+      </h4>
+    </div>
+
+    <div id="panelProductos" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingProducto">
+      <div class="panel-body">
+        {{grilla-productos}}
+        <br/>
+        <div class="panel panel-default">
+          <div class="panel-heading">Talle Producto</div>
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-sm-2"></th>
+                  <th class="col-xs-4">TALLE</th>
+                  <th class="col-xs-4">STOCK</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each model.producto.talles as |item|}}
+                <tr>
+                  <td class="col-sm-2">{{input type="radio" value=item.selected name="talle" click=(action 'selectTalle' item)}}</td>
+                  <td class="col-xs-4">{{item.talle}}</td>
+                  <td class="col-xs-4">{{item.stock}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+
+<!--             <form class="form-inline">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  Nuevo Talle
+                  {{input type="checkbox" checked=nuevoTalle}}
+                </span>
+                {{input type="text" class="form-control" disabled=disableTalleField value=talle}}
+              </div>
+            </form> -->
+
+          </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingDetalle">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#panelDetalle" aria-expanded="true" aria-controls="panelDetalle">
+          Detalle Pedido
+        </a>
+      </h4>
+    </div>
+    <div id="panelDetalle" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingDetalle">
+      <div class="panel-body">
+        <form class="form-horizontal">
+
+          {{#app-label text="Fecha Pedido" errors=errors.model.fechaPedido enable=showError labelClassNames="col-sm-4 control-label"}}
+          <div class="col-sm-2 input-group">
+            {{bootstrap-datepicker value=model.fechaPedido format="dd/mm/yyyy" class="form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"}}
+          </div>
+          {{/app-label}}      
+
+          {{#app-label text="Cantidad" errors=errors.model.cantidad enable=showError labelClassNames="col-sm-4 control-label"}}
+          <div class="col-sm-2 input-group">
+            {{input type="number" value=model.cantidad class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+          </div>  
+          {{/app-label}}  
+
+          {{#app-label text="Precio Venta" errors=errors.precioVenta enable=showError labelClassNames="col-sm-4 control-label"}}
+          <div class="col-sm-2 input-group">
+            <div class="input-group-addon">$</div>
+            {{input type="number" value=precioVenta class="form-control" placeholder="0" aria-describedby="basic-addon1" disabled=true}}
+          </div>
+          {{/app-label}}  
+
+          {{#app-label text="Entrega" errors=errors.model.entrega enable=showError labelClassNames="col-sm-4 control-label"}}
+          <div class="col-sm-2 input-group">
+            <div class="input-group-addon">$</div>
+            {{input type="number" value=model.entrega class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+          </div>  
+          {{/app-label}}   
+
+          {{#app-label text="Saldo" errors=errors.saldo enable=showError labelClassNames="col-sm-4 control-label"}}
+          <div class="col-sm-2 input-group">
+            <div class="input-group-addon">$</div>
+            {{input type="number" value=saldo class="form-control" placeholder="0" aria-describedby="basic-addon1" disabled=true}}
+          </div>
+          {{/app-label}}  
+
+        </form>     
+      </div>
+    </div>
+  </div>
+
+</div>
+
+    <div class="pull-right">
+      <a href="#" class="btn btn-primary" role="button" {{action "save" model}}>Guardar</a>
+      <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>      
+    </div>
+
+

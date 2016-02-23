@@ -1,0 +1,74 @@
+    <div class="panel panel-default">
+      <!-- <div class="panel-heading">Producto</div> -->
+
+      <div class="panel-body">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="col-sm-4">Marca</th>
+              <th class="col-sm-4">Categoria</th>
+              <th class="col-sm-4">Tipo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-sm-4">
+                {{ember-selectize
+                content=marcas
+                optionValuePath="content.id"
+                optionLabelPath="content.texto"
+                selection=marca
+                placeholder="Seleccionar"
+                classNames="form-control input-sm"
+              }}
+            </td>
+            <td class="col-sm-4">
+              {{ember-selectize
+              content=categorias
+              optionValuePath="content.id"
+              optionLabelPath="content.texto"
+              selection=categoria
+              placeholder="Seleccionar"
+              classNames="form-control input-sm"
+            }}
+          </td>
+          <td class="col-sm-4">
+            {{ember-selectize
+            content=tipos
+            optionValuePath="content.id"
+            optionLabelPath="content.texto"
+            selection=tipo
+            placeholder="Seleccionar"
+            classNames="form-control input-sm"
+          }}
+        </td>
+        <td>
+          <a href="#" class="btn btn-primary" role="button" {{action "resetFilter"}}>Limpiar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="col-sm-2">#</th>
+        <th class="col-sm-4">CODIGO</th>
+        <th class="col-sm-6">DESCRIPCION</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each filteredProductos as |item|}}
+      <tr>
+        <td class="col-sm-2">{{input type="radio" value=item.selected name="producto" click=(action 'selectProducto' item)}}</td>
+        <td class="col-sm-4">{{item.codigo}}</td>
+        <td class="col-sm-6">{{item.texto}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+</div>
