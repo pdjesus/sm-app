@@ -12,7 +12,10 @@ export default Ember.Route.extend({
       formaPago: 'CONTADO'
     });
 
-    this.store.findRecord('ficha', params.ficha_id).then(ficha => model.set('ficha', ficha));
+    this.store.findRecord('ficha', params.ficha_id).then(ficha => {
+      Ember.Logger.debug(`Nueva venta para la ficha ${ficha.get('id')}`);
+      model.set('ficha', ficha);
+    });
 
     return model;
   },
@@ -20,7 +23,7 @@ export default Ember.Route.extend({
   controllerName: 'ventas.form',
 
   renderTemplate: function(controller, model) {
-    this.render('ventas.edit', {into: 'secure', controller: controller });
+    this.render('ventas.form', {into: 'secure', controller: controller });
   }
 
 });

@@ -9,10 +9,10 @@ Router.map(function() {
   this.route('secure', function() {
     this.route('ventas', { resetNamespace: true }, function() {
       this.route('new', {
-        path: '/ficha/:ficha_id/new'
+        path: '/:ficha_id/new'
       });
-      this.route('edit', {
-        path: '/edit/:venta_id'
+      this.route('form', {
+        path: '/:venta_id/form'
       });
     });
     this.route('pedidos', { resetNamespace: true }, function() {

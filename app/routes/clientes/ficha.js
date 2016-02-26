@@ -16,7 +16,7 @@ export default Ember.Route.extend({
 
     addVenta(){
       Ember.Logger.debug("routes/clientes/ficha#addVenta");
-      this.transitionTo('ventas.new', this.controller.model);
+      this.transitionTo('ventas.new', this.get('controller.model.id'));
     }
 
   }

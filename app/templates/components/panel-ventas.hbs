@@ -2,9 +2,9 @@
 
   <div class="panel-body">
     <form class="form-inline pull-right">
-      <button class="btn btn-default btn-xs" {{action 'addVenta'}}>agregar</button>
+      <button class="btn btn-default btn-xs" {{action 'addVenta'}}>Registrar Venta</button>
     </form>  
-    <table class="table">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th class="col-xs-1">CODIGO</th>
@@ -15,20 +15,22 @@
           <th class="col-xs-1">DESCUENTO</th>
           <th class="col-xs-1">TOTAL</th>
           <th class="col-xs-1">SALDO</th>
+          <th class="col-xs-1">ACCIONES</th>
         </tr>
       </thead>
       <tbody>
         {{#each ventas as |item|}}
-        <tr>
+          {{#selectable-row data=item selected=venta action='selectVenta'}}
           <td class="col-xs-1">{{item.producto.codigo}}</td>
           <td class="col-xs-4">{{item.producto.texto}}</td>
           <td class="col-xs-1">{{moment-format item.fechaVenta}}</td>
           <td class="col-xs-1">{{item.cantidad}}</td>
           <td class="col-xs-1">{{item.interes}}</td>
           <td class="col-xs-1">{{item.descuento}}</td>
-          <td class="col-xs-1">{{item.totalVenta}}</td>
-          <td class="col-xs-1">{{item.saldo}}</td>
-        </tr>
+          <td class="col-xs-1">{{format-currency item.totalVenta}}</td>
+          <td class="col-xs-1">{{format-currency item.saldo}}</td>
+          <td class="col-xs-1"><button class="btn btn-default btn-xs" {{action 'deleteVenta' item}}>Eliminar</button></td>
+          {{/selectable-row}}
         {{/each}}
       </tbody>
     </table>
@@ -72,9 +74,11 @@
   <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body ">
-        <form class="form-inline pull-right">
-          <button class="btn btn-default btn-xs" {{action 'add'}}>agregar</button>
-        </form>  
+        {{#if hasSaldoPendiente}} 
+          <form class="form-inline pull-right">
+            <button class="btn btn-default btn-xs" {{action 'addCuota'}}>Registrar Cuota</button>
+          </form>  
+        {{/if}}
         <table class="table">
           <thead>
             <tr>
@@ -86,9 +90,9 @@
           <tbody>
             {{#each cuotas as |item|}}
             <tr>
-              <td class="col-xs-4">{{item.fechaCuota}}</td>
+              <td class="col-xs-4">{{moment-format item.fechaCuota}}</td>
               <td class="col-xs-4">{{item.monto}}</td>
-              <td class="col-xs-2"><button class="btn btn-default btn-xs" {{action 'delete' item}}>Eliminar</button></td>
+              <td class="col-xs-2"><button class="btn btn-default btn-xs" {{action 'deleteCuota' item}}>Eliminar</button></td>
             </tr>
             {{/each}}
           </tbody>

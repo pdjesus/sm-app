@@ -10,7 +10,7 @@ export default Ember.Route.extend({
   },
 
   renderTemplate(controller, model) {
-    this.render('ventas.edit', {into: 'secure', controller: controller });
+    this.render('ventas.form', {into: 'secure', controller: controller });
   },  
 
   actions: {
