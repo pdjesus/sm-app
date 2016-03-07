@@ -7,12 +7,11 @@
     <table class="table table-hover">
       <thead>
         <tr>
+          <th class="col-xs-1">FECHA</th>
           <th class="col-xs-1">CODIGO</th>
           <th class="col-xs-4">DESCRIPCION</th>
-          <th class="col-xs-1">FECHA</th>
+          <th class="col-xs-1">TALLE</th>
           <th class="col-xs-1">CANTIDAD</th>
-          <th class="col-xs-1">INTERES</th>
-          <th class="col-xs-1">DESCUENTO</th>
           <th class="col-xs-1">TOTAL</th>
           <th class="col-xs-1">SALDO</th>
           <th class="col-xs-1">ACCIONES</th>
@@ -21,15 +20,14 @@
       <tbody>
         {{#each ventas as |item|}}
           {{#selectable-row data=item selected=venta action='selectVenta'}}
+          <td class="col-xs-1">{{moment-format item.fechaVenta}}</td>
           <td class="col-xs-1">{{item.producto.codigo}}</td>
           <td class="col-xs-4">{{item.producto.texto}}</td>
-          <td class="col-xs-1">{{moment-format item.fechaVenta}}</td>
+          <td class="col-xs-1">{{item.talle.talle}}</td>
           <td class="col-xs-1">{{item.cantidad}}</td>
-          <td class="col-xs-1">{{item.interes}}</td>
-          <td class="col-xs-1">{{item.descuento}}</td>
           <td class="col-xs-1">{{format-currency item.totalVenta}}</td>
           <td class="col-xs-1">{{format-currency item.saldo}}</td>
-          <td class="col-xs-1"><button class="btn btn-default btn-xs" {{action 'deleteVenta' item}}>Eliminar</button></td>
+          <td class="col-xs-1"><button class="btn btn-default btn-xs" {{action 'confirmDeleteVenta' item}}>Eliminar</button></td>
           {{/selectable-row}}
         {{/each}}
       </tbody>
@@ -46,22 +44,28 @@
         <form>
           <div class="form-group">
           <label>Total</label>
-          <input type="number" value={{total}} class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
+          <input value={{format-currency venta.totalVenta}} class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
           </div>
 
-          <div class="form-group">
-          <label>Porcentaje</label>
-          {{input type="number" value=interes class="form-control" aria-describedby="basic-addon1" disabled=disabled}}
+          <div class="form-group {{unless isNotDirty 'has-warning'}}">
+          <label class="control-label">Interes</label>
+          <div class="input-group">
+          {{input type="number" value=interes class="form-control" aria-describedby="basic-addon1" disabled=cannotUpdateInteres}}
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" disabled={{isNotDirty}} {{action 'saveVenta'}}>Guardar</button>
+          </span>
+          </div>
+          
           </div>
 
           <div class="form-group">
           <label>Total con Interes</label>
-          <input type="number" value=totalConInteres class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
+          <input value={{format-currency venta.totalConInteres}} class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
           </div>
 
           <div class="form-group">
           <label>Saldo</label>
-          <input type="number" value=saldo class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
+          <input value={{format-currency venta.saldo}} class="form-control" aria-describedby="basic-addon1" disabled=disabled/>
           </div>
         </form>
 
@@ -71,15 +75,16 @@
 
   <div class="col-md-1"></div>
 
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="panel panel-default">
-      <div class="panel-body ">
+      <div class="panel-heading">Cuotas</div>
+      <div class="panel-body">
         {{#if hasSaldoPendiente}} 
           <form class="form-inline pull-right">
-            <button class="btn btn-default btn-xs" {{action 'addCuota'}}>Registrar Cuota</button>
+            <button class="btn btn-default btn-xs" {{action 'registrarCuota'}}>Registrar Cuota</button>
           </form>  
         {{/if}}
-        <table class="table">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th class="col-xs-4">FECHA</th>
@@ -91,8 +96,8 @@
             {{#each cuotas as |item|}}
             <tr>
               <td class="col-xs-4">{{moment-format item.fechaCuota}}</td>
-              <td class="col-xs-4">{{item.monto}}</td>
-              <td class="col-xs-2"><button class="btn btn-default btn-xs" {{action 'deleteCuota' item}}>Eliminar</button></td>
+              <td class="col-xs-4">{{format-currency item.monto}}</td>
+              <td class="col-xs-2"><button class="btn btn-default btn-xs" {{action 'confirmDeleteCuota' item}}>Eliminar</button></td>
             </tr>
             {{/each}}
           </tbody>
@@ -102,3 +107,21 @@
   </div>
 
 </div>
+
+{{#app-modal elementId='confirmRemoveVenta' title='Eliminar venta' ok='deleteVenta'}}
+¿Esta seguro que desea eliminar la venta seleccionada?
+{{/app-modal}}
+
+{{#app-modal elementId='confirmRemoveCuota' title='Eliminar Cuota' ok='deleteCuota'}}
+¿Esta seguro que desea eliminar la cuota?
+{{/app-modal}}
+
+{{#app-modal elementId='registrarCuotaModal' title='Registrar Cuota' ok='addCuota'}}
+  {{#app-label text="Valor cuota" errors=errors.valorCuota enable=showError labelClassNames="col-sm-4 control-label"}}
+  <div class="col-sm-4 input-group">
+    <div class="input-group-addon">$</div>
+    {{input type="number" value=valorCuota class="form-control" placeholder="0" aria-describedby="basic-addon1"}}
+  </div>
+  {{/app-label}}  
+{{/app-modal}}
+

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Route from './form';
 
-export default Ember.Route.extend({
+export default Route.extend({
 
   model(params) {
     var model = this.store.createRecord('venta', {
@@ -20,10 +20,6 @@ export default Ember.Route.extend({
     return model;
   },
 
-  controllerName: 'ventas.form',
-
-  renderTemplate: function(controller, model) {
-    this.render('ventas.form', {into: 'secure', controller: controller });
-  }
+  controllerName: 'ventas.form'
 
 });

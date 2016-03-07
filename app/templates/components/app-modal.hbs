@@ -1,0 +1,16 @@
+<div class="modal-dialog">
+  <div class="modal-content panel-info">
+    <div class="modal-header alert-info">
+      <button type="button" class="close" {{action "cancel"}}><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">{{title}}</h4>
+    </div>
+    <div class="modal-body">
+      {{yield}}
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn btn-info" role="button" {{action "ok"}}>{{okButtonLabel}}</a>
+      <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>{{cancelButtonLabel}}</a>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+

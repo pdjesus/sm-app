@@ -10,7 +10,20 @@ export default DS.Model.extend({
   interes: DS.attr('number'),
   descuento: DS.attr('number'),
   totalVenta: DS.attr('number'),
-  saldo: DS.attr('number'),
   formaPago: DS.attr('string'),
-  cuotas: DS.hasMany('cuota')
+  cuotas: DS.hasMany('cuota'),
+
+  totalConInteres: Ember.computed('totalVenta', 'interes', function(){
+    return this.get('totalVenta') + ( this.get('totalVenta') * this.get('interes') / 100 );
+  }),
+
+  montoCuotas: Ember.computed.mapBy('cuotas', 'monto'),
+  totalPagado: Ember.computed.sum('montoCuotas'),
+
+  numberService: Ember.inject.service('number'),
+
+  saldo: Ember.computed('totalConInteres', 'totalPagado', function(){ 
+    return this.get('numberService').round(this.get('totalConInteres') - this.get('totalPagado')) 
+  })
+
 });
