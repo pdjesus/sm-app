@@ -2,24 +2,24 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   
-  model: function() {
+  model() {
     return this.store.findAll('cliente');
   },
 
   actions:{
 
-    delete: function(item) {
+    delete(item) {
       this.set('itemToDelete', item);
-      $("#confirmDeleteModal").modal();
+      $("#confirmRemoveCliente").modal();
     },
 
-    confirmDelete: function() {
+    confirmDelete() {
       this.get('itemToDelete').destroyRecord();
       this.set('itemToDelete', null);
-      $("#confirmDeleteModal").modal('hide');
+      $("#confirmRemoveCliente").modal('hide');
     },
 
-    filterBy: function(text) {
+    filterBy(text) {
       this.controller.filterBy(text);
     }
 

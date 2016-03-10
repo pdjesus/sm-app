@@ -9,8 +9,9 @@
         <tr>
           <th class="col-xs-1">FECHA</th>
           <th class="col-xs-1">CODIGO</th>
-          <th class="col-xs-4">DESCRIPCION</th>
+          <th class="col-xs-3">DESCRIPCION</th>
           <th class="col-xs-1">TALLE</th>
+          <th class="col-xs-2">FORMA DE PAGO</th>
           <th class="col-xs-1">CANTIDAD</th>
           <th class="col-xs-1">TOTAL</th>
           <th class="col-xs-1">SALDO</th>
@@ -22,8 +23,9 @@
           {{#selectable-row data=item selected=venta action='selectVenta'}}
           <td class="col-xs-1">{{moment-format item.fechaVenta}}</td>
           <td class="col-xs-1">{{item.producto.codigo}}</td>
-          <td class="col-xs-4">{{item.producto.texto}}</td>
+          <td class="col-xs-3">{{item.producto.texto}}</td>
           <td class="col-xs-1">{{item.talle.talle}}</td>
+          <td class="col-xs-2">{{item.formaPago}}</td>
           <td class="col-xs-1">{{item.cantidad}}</td>
           <td class="col-xs-1">{{format-currency item.totalVenta}}</td>
           <td class="col-xs-1">{{format-currency item.saldo}}</td>

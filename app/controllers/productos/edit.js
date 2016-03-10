@@ -17,6 +17,18 @@ export default Ember.Controller.extend(EmberValidations, {
 
   actions: {
 
+    setMarca(marca) {
+      this.set('model.marca', marca);
+    },
+
+    setCategoria(categoria) {
+      this.set('model.categoria', categoria);
+    },
+
+    setTipo(tipo) {
+      this.set('model.tipo', tipo);
+    },
+
     save: function() {
       var _this = this;
       _this.set('showError', true);

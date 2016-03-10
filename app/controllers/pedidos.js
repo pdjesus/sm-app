@@ -29,6 +29,14 @@ export default Ember.Controller.extend({
       }); 
     }
     this.set('filteredModel', filteredModel);
-  }  
+  },
+
+  actions: {
+
+    setEstado(estado) {
+      this.set('estadoSelected', estado);
+    }
+
+  }
 
 });

@@ -1,11 +1,10 @@
-<div id="formModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header alert-info">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{#if model.isNew}}Nuevo Producto{{else}}Modificar datos del Producto{{/if}}</h4>
+<div class="row">
+  <div class="col-sm-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{#if model.isNew}}Nuevo Producto{{else}}Modificar datos del Producto{{/if}}
       </div>
-      <div class="modal-body">
+      <div class="panel-body">
         <div class="row">
           <div class="col-xs-6">
             {{#app-label text="Descripción" errors=errors.model.texto enable=showError}}
@@ -17,51 +16,36 @@
             {{/app-label}}
 
             {{#app-label text="Marca" errors=errors.model.marca enable=showError}}
-            {{ember-selectize
-            content=marcas
-            optionValuePath="content.id"
-            optionLabelPath="content.texto"
-            selection=model.marca
-            placeholder="Seleccionar"
-            classNames="form-control input-sm"
-          }}
-          {{/app-label}}
+            {{#power-select options=marcas selected=model.marca placeholder="Seleccionar" onchange=(action "setMarca") as |marca|}}
+            {{marca.texto}}
+            {{/power-select}}
+            {{/app-label}}
 
-          {{#app-label text="Categoria" errors=errors.model.categoria enable=showError}}
-          {{ember-selectize
-          content=categorias
-          optionValuePath="content.id"
-          optionLabelPath="content.texto"
-          selection=model.categoria
-          placeholder="Seleccionar"
-          classNames="form-control input-sm"
-        }}
-        {{/app-label}}
+            {{#app-label text="Categoria" errors=errors.model.categoria enable=showError}}
+            {{#power-select options=categorias selected=model.categoria placeholder="Seleccionar" onchange=(action "setCategoria") as |categoria|}}
+            {{categoria.texto}}
+            {{/power-select}}
+            {{/app-label}}
 
-        {{#app-label text="Tipo" errors=errors.model.tipo enable=showError}}
-        {{ember-selectize
-        content=tipos
-        optionValuePath="content.id"
-        optionLabelPath="content.texto"
-        selection=model.tipo
-        placeholder="Seleccionar"
-        classNames="form-control input-sm"
-      }}
-      {{/app-label}}
-    </div>
-    <div class="col-xs-6">
+            {{#app-label text="Tipo" errors=errors.model.tipo enable=showError}}
+            {{#power-select options=tipos selected=model.tipo placeholder="Seleccionar" onchange=(action "setTipo") as |tipo|}}
+            {{tipo.texto}}
+            {{/power-select}}
+            {{/app-label}}
+          </div>
+          <div class="col-xs-6">
 
-      {{talle-producto talles=model.talles producto=model}}
-    </div>
-  </div>
+            {{talle-producto talles=model.talles producto=model}}
+          </div>
+        </div>
 
-  {{precio-producto model=model errors=errors showError=showError producto=model}}
+        {{precio-producto model=model errors=errors showError=showError producto=model}}
 
-</div>
-<div class="modal-footer">
-  <a href="#" class="btn btn-primary" role="button" {{action "save"}}>Guardar</a>
-  <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>
-</div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+      </div>
+      <div class="panel-footer text-right">
+        <a href="#" class="btn btn-primary" role="button" {{action "save"}}>Guardar</a>
+        <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->

@@ -20,13 +20,10 @@
 
     <div id="panelProductos" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingProducto">
       <div class="panel-body">
-        {{grilla-productos}}
-        <br/>
-        {{grilla-talles producto=model.producto}}    
+        {{grilla-productos selected=model.producto.content}} <!-- Requiere content por la relacion con el modelo -->
       </div>
     </div>
   </div>
-
 
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingDetalle">
@@ -48,10 +45,9 @@
           {{/app-label}} 
 
           {{#app-label text="Forma de Pago" errors=errors.formaPago enable=showError labelClassNames="control-label"}}
-            {{ember-selectize
-              content=formasPago
-              value=formaPago
-            }}
+            {{#power-select options=formasPago selected=formaPago onchange=(action "setFormaPago") as |formaPago|}}
+              {{formaPago}}
+            {{/power-select}}
           {{/app-label}}
 
           {{#if isContado }}
@@ -68,6 +64,13 @@
         <div class="col-sm-2"></div>
 
         <div class="col-sm-2">
+
+          {{#app-label text="Talle" errors=errors.model.talle enable=showError labelClassNames="control-label"}}
+            {{#power-select options=model.producto.talles selected=model.talle onchange=(action "setTalle") as |talle|}}
+              {{talle.talle}} <i>({{talle.stock}})</i>
+            {{/power-select}}
+          {{/app-label}}  
+
           {{#app-label text="Cantidad" errors=errors.cantidad enable=showError labelClassNames="control-label"}}
           <div class="input-group">
             {{input type="number" value=cantidad class="form-control" placeholder="0" aria-describedby="basic-addon1"}}

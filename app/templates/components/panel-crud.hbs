@@ -1,0 +1,55 @@
+<div class="row">
+
+  <div class="col-md-12"><br/></div>
+
+  <div class="col-md-6">
+    <form class="form-inline pull-right">
+    <button class="btn btn-default btn-xs" {{action 'add'}}>Agregar</button>
+    </form>  
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-xs-3">DESCRIPCION</th>
+          <th class="col-xs-1">ACCIONES</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |item|}}
+        {{#selectable-row data=item selected=selectedItem action='select'}}
+        <td class="col-xs-3">{{get item field}}</td>
+        <td class="col-xs-1"><button class="btn btn-default btn-xs" {{action 'confirmRemove' item}}>Eliminar</button></td>
+        {{/selectable-row}}
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">Formulario</div>
+
+      <div class="panel-body">
+
+        <form>
+          <div class="form-group">
+            <label class="control-label">Descripción</label>
+            <div class="input-group">
+              {{input value=texto class="form-control" aria-describedby="basic-addon1"}}
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" {{action 'save'}} disabled={{disableSaveButton}}>Guardar</button>
+              </span>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{#app-modal elementId=confirmRemoveId title='Eliminar' ok='remove'}}
+¿Esta seguro que desea eliminar el elemento seleccionado?
+{{/app-modal}}

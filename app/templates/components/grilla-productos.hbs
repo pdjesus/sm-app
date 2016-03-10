@@ -15,60 +15,43 @@
           <tbody>
             <tr>
               <td class="col-sm-4">
-                {{ember-selectize
-                content=marcas
-                optionValuePath="content.id"
-                optionLabelPath="content.texto"
-                selection=marca
-                placeholder="Seleccionar"
-                classNames="form-control input-sm"
-              }}
-            </td>
-            <td class="col-sm-4">
-              {{ember-selectize
-              content=categorias
-              optionValuePath="content.id"
-              optionLabelPath="content.texto"
-              selection=categoria
-              placeholder="Seleccionar"
-              classNames="form-control input-sm"
-            }}
-          </td>
-          <td class="col-sm-4">
-            {{ember-selectize
-            content=tipos
-            optionValuePath="content.id"
-            optionLabelPath="content.texto"
-            selection=tipo
-            placeholder="Seleccionar"
-            classNames="form-control input-sm"
-          }}
-        </td>
-        <td>
-          <a href="#" class="btn btn-primary" role="button" {{action "resetFilter"}}>Limpiar</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                {{#power-select options=marcas selected=marca placeholder="Seleccionar" onchange=(action "setMarca") as |marca|}}
+                {{marca.texto}}
+                {{/power-select}}
+              </td>
+              <td class="col-sm-4">
+                {{#power-select options=categorias selected=categoria placeholder="Seleccionar" onchange=(action "setCategoria") as |categoria|}}
+                {{categoria.texto}}
+                {{/power-select}}
+              </td>
+              <td class="col-sm-4">
+                {{#power-select options=tipos selected=tipo placeholder="Seleccionar" onchange=(action "setTipo") as |tipo|}}
+                {{tipo.texto}}
+                {{/power-select}}
+              </td>
+              <td>
+                <a href="#" class="btn btn-primary" role="button" {{action "resetFilter"}}>Limpiar</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="col-sm-2">#</th>
-        <th class="col-sm-4">CODIGO</th>
-        <th class="col-sm-6">DESCRIPCION</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each filteredProductos as |item|}}
-      <tr>
-        <td class="col-sm-2">{{input type="radio" value=item.selected name="producto" click=(action 'selectProducto' item)}}</td>
-        <td class="col-sm-4">{{item.codigo}}</td>
-        <td class="col-sm-6">{{item.texto}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="col-sm-4">CODIGO</th>
+              <th class="col-sm-8">DESCRIPCION</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each filteredProductos as |item|}}
+            {{#selectable-row data=item selected=selected action='selectProducto'}}
+            <td class="col-sm-4">{{item.codigo}}</td>
+            <td class="col-sm-8">{{item.texto}}</td>
+            {{/selectable-row}}
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
 
-</div>
+    </div>

@@ -1,0 +1,49 @@
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#categorias" aria-controls="categorias" role="tab" data-toggle="tab">Categorias</a></li>
+    <li role="presentation"><a href="#marcas" aria-controls="marcas" role="tab" data-toggle="tab">Marcas</a></li>
+    <li role="presentation"><a href="#tipos" aria-controls="tipos" role="tab" data-toggle="tab">Tipos</a></li>
+    <li role="presentation"><a href="#ciudades" aria-controls="ciudades" role="tab" data-toggle="tab">Ciudades</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="categorias">
+      {{panel-crud model=categorias confirmRemoveId='confirmRemoveCategoria' 
+        selectedItem=categoria 
+        select='selectCategoria'
+        save='saveCategoria'
+        remove='removeCategoria'
+      }}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="marcas">
+      {{panel-crud model=marcas confirmRemoveId='confirmRemoveMarca' 
+        selectedItem=marca 
+        select='selectMarca'
+        save='saveMarca'
+        remove='removeMarca'
+      }}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="tipos">
+      {{panel-crud model=tipos confirmRemoveId='confirmRemoveTipo' 
+        selectedItem=tipo 
+        select='selectTipo'
+        save='saveTipo'
+        remove='removeTipo'
+      }}
+    </div>
+    <div role="tabpanel" class="tab-pane" id="ciudades">
+      {{panel-crud model=ciudades confirmRemoveId='confirmRemoveCiudad' 
+        selectedItem=ciudad 
+        select='selectCiudad'
+        save='saveCiudad'
+        remove='removeCiudad'
+        field='nombre'
+      }}
+    </div>
+  </div>
+
+</div>
+

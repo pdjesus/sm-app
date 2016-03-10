@@ -115,10 +115,14 @@ export default Ember.Controller.extend(EmberValidations, {
       this.calcularPrecioVenta();
     },
 
-    selectTalle(talle){
+    setTalle(talle){
       this.set('model.talle', talle);
     },
 
+    setFormaPago(formaPago) {
+      this.set('formaPago', formaPago);
+    },
+    
     save() {
       var _this = this;
       _this.set('showError', true);

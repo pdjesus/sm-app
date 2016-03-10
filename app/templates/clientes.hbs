@@ -34,8 +34,8 @@
           <td>{{item.email}}</td>
           <td>{{item.ciudad.nombre}}</td>
           <td>
-            {{#link-to 'clientes.edit' item.id classNames="btn btn-default btn-xs"}}Modificar{{/link-to}}
             {{#link-to 'clientes.ficha' item.id classNames="btn btn-default btn-xs"}}Ficha{{/link-to}}
+            {{#link-to 'clientes.edit' item.id classNames="btn btn-default btn-xs"}}Modificar{{/link-to}}
             <button class="btn btn-default btn-xs" {{action 'delete' item}}>Eliminar</button>
           </td>
         </tr>
@@ -47,20 +47,6 @@
 
 {{outlet}}
 
-<div id="confirmDeleteModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content panel-info">
-      <div class="modal-header alert-info">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Confirmar Eliminación</h4>
-      </div>
-      <div class="modal-body">
-      Esta seguro que desea eliminar el cliente seleccionado?
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="btn btn-info" role="button" {{action "confirmDelete"}}>Eliminar</a>
-      <a href="javascript:void(0)" class="btn btn-default" role="button" onclick="$('#confirmDeleteModal').modal('hide');">Cancelar</a>
-    </div>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+{{#app-modal elementId='confirmRemoveCliente' title='Eliminar cliente' ok='confirmDelete'}}
+¿Esta seguro que desea eliminar el cliente seleccionado?
+{{/app-modal}}

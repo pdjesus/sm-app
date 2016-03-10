@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -23,7 +24,7 @@ export default DS.Model.extend({
   numberService: Ember.inject.service('number'),
 
   saldo: Ember.computed('totalConInteres', 'totalPagado', function(){ 
-    return this.get('numberService').round(this.get('totalConInteres') - this.get('totalPagado')) 
+    return this.get('numberService').round(this.get('totalConInteres') - this.get('totalPagado'));
   })
 
 });

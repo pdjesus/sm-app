@@ -1,13 +1,18 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 import EmberValidations from 'ember-validations';
 
 export default Ember.Controller.extend(EmberValidations, {
 
-  ciudades: Ember.computed(function(){
+  ciudades: Ember.computed(function() {
     return this.store.findAll('ciudad');
   }),
 
   actions: {
+
+    setCiudad(ciudad) {
+      this.set('model.ciudad', ciudad);
+    },
 
     save: function(model) {
       var _this = this;

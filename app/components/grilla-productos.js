@@ -43,14 +43,22 @@ export default Ember.Component.extend({
 
   }),
 
-  changeFilterObserves: Ember.observer('marca', 'categoria', 'tipo', function(){
-    this.send('selectProducto', null);
-  }), 
-
   actions: {
 
     selectProducto(producto) {
       this.sendAction('notifySelectProducto', producto);
+    },
+
+    setMarca(marca) {
+      this.set('marca', marca);
+    },
+
+    setCategoria(categoria) {
+      this.set('categoria', categoria);
+    },
+
+    setTipo(tipo) {
+      this.set('tipo', tipo);
     },
 
     resetFilter(){

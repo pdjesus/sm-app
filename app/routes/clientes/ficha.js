@@ -6,7 +6,12 @@ export default Ember.Route.extend({
     return this.store.queryRecord('ficha', {cliente: params.cliente_id});
   },
 
-  controllerName: 'fichas.form',
+  // https://guides.emberjs.com/v2.4.0/routing/query-params/#toc_sticky-query-param-values
+  resetController(controller, isExiting, transition) {
+    if (isExiting) {
+      controller.set('venta', null);
+    }
+  },  
 
   renderTemplate(controller, model) {
     this.render('clientes.ficha', {into: 'secure', controller: controller });

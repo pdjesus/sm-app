@@ -1,4 +1,4 @@
-import BaseRoute from '../crud';
+import BaseRoute from './edit';
 
 export default BaseRoute.extend({
 
@@ -6,10 +6,6 @@ export default BaseRoute.extend({
     return this.store.createRecord('producto');
   },
 
-  controllerName: 'productos.edit',
-
-  renderTemplate: function(controller, model) {  
-    this.render('productos.edit', {controller: controller});    
-  }
+  controllerName: 'productos.edit'
 
 });

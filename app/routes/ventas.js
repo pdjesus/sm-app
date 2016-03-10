@@ -3,7 +3,15 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
   model: function() {
-    return Ember.$.getJSON('ventas/pendientes');
+    return this.store.query('venta', {pendientes: 1});
+  },
+
+  actions: {
+
+    filterBy: function(text) {
+      this.controller.filterBy(text);
+    }
+    
   }
 
 });

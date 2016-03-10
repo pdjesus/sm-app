@@ -1,6 +1,5 @@
 import DS from 'ember-data';
 import Ember from 'ember';
-import Inflector from 'ember-inflector';
 
 export default DS.JSONAPISerializer.extend(DS.EmbeddedRecordsMixin, {
 

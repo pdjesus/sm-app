@@ -1,11 +1,3 @@
-.selectize-control.single .selectize-input, .selectize-control.single .selectize-input input {
-  width: 100%!important;
-}
-
-.form-control.selectize-control {
-  padding: 0!important;
-}
-
 .container {
   width: 95%;
 }

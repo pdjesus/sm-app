@@ -1,12 +1,11 @@
-<div id="formModal" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header alert-info">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{#if model.isNew}}Nuevo Cliente{{else}}Modificar datos del Cliente{{/if}}</h4>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{#if model.isNew}}Nuevo Cliente{{else}}Modificar datos del Cliente{{/if}}
       </div>
-      <div class="modal-body">
-      <form>
+      <div class="panel-body">
+        <form>
           {{#app-label text="Nombre y Apellido" errors=errors.model.nombre enable=showError}}
           {{input type="text" value=model.nombre class="form-control" placeholder="Nombre y Apellido" aria-describedby="basic-addon1"}}
           {{/app-label}}
@@ -24,13 +23,9 @@
           {{/app-label}}
 
           {{#app-label text="Ciudad" errors=errors.model.ciudad enable=showError}}
-          {{ember-selectize
-          content=ciudades
-          optionValuePath="content.id"
-          optionLabelPath="content.nombre"
-          selection=model.ciudad
-          placeholder="Seleccionar"
-          }}
+          {{#power-select options=ciudades selected=model.ciudad placeholder="Seleccionar" onchange=(action "setCiudad") as |ciudad|}}
+          {{ciudad.nombre}}
+          {{/power-select}}
           {{/app-label}}
 
           {{#app-label text="Email" errors=errors.model.email enable=showError}}
@@ -40,12 +35,12 @@
           {{#app-label text="Fecha Nacimiento" errors=errors.model.fechaNac enable=showError}}
           {{bootstrap-datepicker value=model.fechaNac format="dd/mm/yyyy" class="form-control" placeholder="dd/mm/yyyy" aria-describedby="basic-addon1"}}
           {{/app-label}}          
-      </form>
+        </form>
+      </div>
+      <div class="panel-footer text-right">
+        <a href="#" class="btn btn-primary" role="button" {{action "save" model}}>Guardar</a>
+        <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>
+      </div>
     </div>
-    <div class="modal-footer">
-      <a href="#" class="btn btn-primary" role="button" {{action "save" model}}>Guardar</a>
-      <a href="#" class="btn btn-default" role="button" {{action "cancel"}}>Cancelar</a>
-    </div>
-  </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+  </div>
+</div>

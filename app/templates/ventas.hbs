@@ -1,46 +1,29 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">    
-      <ul class="nav navbar-nav navbar-left">
-        <li>{{#link-to 'ventas'}}Registrar Venta{{/link-to}}</li>
-        <li>{{#link-to 'ventas'}}Cancelar Venta{{/link-to}}</li>
-        <li>{{#link-to 'ventas'}}Registrar Cuota{{/link-to}}</li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<div class="panel panel-primary">
-  <div class="panel-heading">Ventas</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Listado de ventas con pagos pendientes</div>
   <div class="panel-body">
     <table class="table">
-    	<thead>
+      <thead>
         <tr>
-          <th>FECHA VENTA</th>
-          <th>CLIENTE</th>
-          <th>DNI</th>
-          <th>PRODUCTO</th>
-          <th>TALLE</th>
-          <th>INTERES</th>
-          <th>TOTAL VENTA</th>
-          <th>SALDO</th>
-          <th>FORMA DE PAGO</th>
+          <th class="col-xs-1">FECHA</th>
+          <th class="col-xs-2">CLIENTE</th>
+          <th class="col-xs-3">PRODUCTO</th>
+          <th class="col-xs-2">FORMA DE PAGO</th>
+          <th class="col-xs-1">TOTAL</th>
+          <th class="col-xs-1">SALDO</th>
+          <th class="col-xs-1">ACCIONES</th>
         </tr>
       </thead>
       <tbody>
-        {{#each model as |item|}}
-        <tr>
-          <td>{{item.fechaVenta}}</td>
-          <td>{{item.cliente}}</td>
-          <td>{{item.dni}}</td>
-          <td>{{item.producto}}</td>
-          <td>{{item.talle}}</td>
-          <td>{{item.interes}}</td>
-          <td>{{item.totalVenta}}</td>
-          <td>{{item.saldo}}</td>
-          <td>{{item.formaPago}}</td>
-        </tr>
+        {{#each filteredModel as |item|}}
+          <tr>
+          <td class="col-xs-1">{{moment-format item.fechaVenta}}</td>
+          <td class="col-xs-2">{{item.ficha.cliente.nombre}}</td>
+          <td class="col-xs-3">{{item.producto.codigo}} - {{item.producto.texto}}</td>
+          <td class="col-xs-2">{{item.formaPago}}</td>
+          <td class="col-xs-1">{{format-currency item.totalVenta}}</td>
+          <td class="col-xs-1">{{format-currency item.saldo}}</td>
+          <td class="col-xs-1">{{#link-to 'clientes.ficha' item.ficha.cliente.id (query-params venta=item.id) classNames="btn btn-default btn-xs"}}Ficha{{/link-to}}</td>
+          </tr>
         {{/each}}
       </tbody>
     </table>

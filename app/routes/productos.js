@@ -12,6 +12,26 @@ export default Ember.Route.extend({
 
   model: function() {
     return this.store.findAll('producto');
+  },
+
+  actions: {
+
+    filterBy: function(text) {
+      this.controller.filterBy(text);
+    },
+
+    delete(item) {
+      this.set('itemToDelete', item);
+      $("#confirmRemoveProducto").modal();
+    },
+
+    confirmDelete() {
+      this.get('itemToDelete').destroyRecord();
+      this.set('itemToDelete', null);
+      $("#confirmRemoveProducto").modal('hide');
+    },    
+    
   }
+
 
 });

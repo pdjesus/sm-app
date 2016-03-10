@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import config from './config/environment';
 
-var Router = Ember.Router.extend({
+const Router = Ember.Router.extend({
   location: config.locationType
 });
 
@@ -21,8 +21,6 @@ Router.map(function() {
         path: '/edit/:pedido_id'
       });
     });
-    this.route('reclamos', { resetNamespace: true });
-    this.route('entregas', { resetNamespace: true });
     this.route('reportes');
     this.route('clientes', { resetNamespace: true }, function() {
       this.route('new');
@@ -40,6 +38,8 @@ Router.map(function() {
         path: '/edit/:producto_id'
       });      
     });
+    
+    this.route('settings');
   });
 });
 
